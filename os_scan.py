@@ -16,7 +16,7 @@ class OsScanner:
 		self.OsUsers = [] # List of system users
 		self.OsGroups = [] # List of system groups
 		self.OsServices = [] # List of system services
-		self.OsCurrentUser = "" # Current user of the system
+		self.OsCurrentUser = ""# Current user of the system
 
 	# Get Current User function
 	def get_OsCurrentUser(self):
@@ -28,7 +28,8 @@ class OsScanner:
 		return current_user
 
 
-	def set_OsCurrentUser(seelf)	
+	def set_OsCurrentUser(self):
+		self.OsCurrentUser = self.get_OsCurrentUser()
 
 	# Get OsUsers List fuction
 	def get_OsUsers(self):
@@ -41,8 +42,16 @@ class OsScanner:
 		return self.OsUsers
 
 
-	def gatherGroupInfo(self):
-		pass
+	def get_OsGroups(self):
+		try:
+			groups = grp.getgrall()
+		except Excpetion:
+			groups = []
+
+		#self.OsGroups = groups
+
+		return groups
+		
 
 	def gatherFileSystem(self):
 		pass
@@ -53,10 +62,14 @@ class OsScanner:
 
 if __name__ == "__main__":
 	scanner = OsScanner()
-	user_info = scanner.get_OsCurrentUser()
-	print("Current User:", user_info)
+	
+	# Tester for get_OsCurrentUser functions
+	name = scanner.get_OsCurrentUser()
+	print("Current User:", name)
 
-	users = scanner.get_OsUsers()
-	print("Current User List:")
-	for user in users:
-		print("\t\t  " + user)
+	# Tester for get_OsGroups() function
+	groups = scanner.get_OsGroups() # Returns a struct of a group {gr_name, gr_passwd, gr_gid, gr_mem} 
+									# Group Name, Group password, Numerical Group ID, Group Member's User names
+	print("Current Groups:")
+	for group in groups:
+		print(group.gr_name + "\t" + str(group.gr_gid)) # Print each group name and group id
