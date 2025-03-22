@@ -7,11 +7,14 @@ import os
 import pwd
 import grp
 import stat
+import re
 import subprocess
-from User import User
 import tkinter as tk
 from tkinter import ttk
 from Group import Group
+from User import User
+from Service import Service
+from Executable import Executable
 
 
 class OsScanner:
@@ -22,8 +25,9 @@ class OsScanner:
 		self.OsGroups = [] # List of system groups
 		self.OsServices = [] # List of system services
 		self.OsCurrentUser = ""# Current user of the system
+		self.OsExecutables = []
 
-	# Get Current User function
+	# Get Current User method
 	def get_OsCurrentUser(self):
 		try:
 			current_user = os.getlogin() # Returns a string denoting the name of the current user
@@ -32,11 +36,11 @@ class OsScanner:
 
 		return current_user
 
-
+    # Set OsCurrent method
 	def set_OsCurrentUser(self):
 		self.OsCurrentUser = self.get_OsCurrentUser()
 
-	# Get OsUsers List fuction
+	# Get OsUsers List method
 	def get_OsUsers(self):
 		
 		if self.OsType == 'posix':
@@ -47,7 +51,7 @@ class OsScanner:
 
 		return self.OsUsers
 
-
+	# Get OsGroups List method
 	def get_OsGroups(self):
 		try:
 			groups = grp.getgrall()
@@ -59,23 +63,101 @@ class OsScanner:
 
 		return self.OsGroups
 		
+    # Get OsServices List method
+	def get_OsServices(self):
+		
+		# Find a way to get the running services on operating system
 
-	def gatherFileSystem(self):
-		pass
+		# Method one: Use systemctl with the options list-units and --type=service
 
-	def checkBadPermissions(self):
-		pass
+		try:
+			output = subprocess.check_output(['systemctl','list-units','--type=service'], universal_newlines=True)
+			
+			lines = output.split('\n')
+
+			for line in lines:
+				
+				nameMatch = re.match(r'^\s*(\S+)\.service', line)
+
+				if nameMatch:
+					self.OsServices.append(Service(nameMatch.group(1)))
+				else:
+					continue
+		except:
+			return "Error in running the systemctl command"
+
+		return self.OsServices
+
+	# Get OsExecutables List method
+	def get_OsExecutables(self):
+		
+		# Check the files inside of the /bin folder and /usr/bin folder
+
+		rootBinPath = "/bin/"
+
+		binFiles = os.listdir(rootBinPath)
+
+		for fileName in binFiles:
+
+			self.OsExecutables.append(Executable(fileName, rootBinPath))
+
+		return self.OsExecutables
+
+	# Method for checking the sudoers file 
+	def check_Sudoers(self):
+
+		# Check and see if the '/etc/sudoers file has misconfigured permissions'
+		sudoersPath = "/etc/sudoers"
+
+		sudoersPerms = oct(os.stat(sudoersPath).st_mode)[-3:]
+
+		return sudoersPerms
+
 
 
 if __name__ == "__main__":
+	
 	scanner = OsScanner()
 	
+	#Tester for check_Sudeors method
+
+	if scanner.check_Sudoers() in ['777', '666', '644', '600']:
+		print("Potential Misconfiguration of Permissions for the sudoers file")
+	else:
+		print("Sudoers File Check found no Misconfiguration")
+
+
+
+
+	#Tester for the get_OsExecutables function
+
+	# for executable in scanner.get_OsExecutables():
+	# 	print(executable.Name
+	# 			 + "\t" + executable.Path
+	# 			 + "\t" + executable.Owner
+	# 			 + "\t" + executable.Group
+	# 			 + "\t" + executable.Permissions)
+
+
+
+
+	#Tester for the get_OsServices function
+	# for service in scanner.get_OsServices():
+	# 	#if service.serviceName is not None:
+	# 	print(service.serviceName + ":")
+	# 	print("\t\t\t" + service.serviceStatus)
+	# 	print("\t\t\t" + service.pid)
+	# 	print("\t\t\t" + service.serviceOwner)
+	# 	print("\t\t\t" + service.serviceGroup)
+
+	# 	print("\n\n")
+
 	# Tester for get_OsCurrentUser functions
 	#name = scanner.get_OsCurrentUser()
 	#print("Current User:", name)
-
-	root = tk.Tk()
-	root.title("User Table")
+'''
+		root = tk.Tk()
+		root.title("User Table")
 	root.geometry("800x1800")
 
 	notebook = ttk.Notebook(root)
@@ -153,5 +235,5 @@ if __name__ == "__main__":
 		for member in enumerate(group.members):
 			print(member)
 		print()
-
+'''
 
