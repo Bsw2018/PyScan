@@ -1,106 +1,186 @@
+import os
+import sys
 import json
 import requests
-import time
+sys.path.append(os.path.abspath("./lib"))
+from cvss import CVSS3, CVSS4
+from colors import *
 
-# Load installed software information from a JSON file.
 def load_system_info(file_path):
-    with open(file_path, "r") as f:
-        return json.load(f)
-
-# Query OSV.dev API for vulnerabilities of a specific package and version.
-def query_osv(package_name, version):
-    """
-    Query the OSV.dev API for vulnerabilities of a specific package and version.
-    """
-    url = "https://api.osv.dev/v1/query"
-    payload = {
-    "package": {
-        "name": package_name,
-        "ecosystem": get_ecosystem(package_name)
-    },
-    "version": version
-    }
-
-    response = requests.post(url, json=payload)
-    if response.status_code == 200:
-        return response.json()
-    else:
-        print(f"Error querying OSV.dev: {response.status_code} - {response.text}")
-        return None
-
-def get_ecosystem(package_name):
-    ecosystem_map = {
-        "log4j": "Maven",
-        "openssl": "Debian",
-        "nginx": "Debian",
-        "apache struts": "Maven"
-    }
-    return ecosystem_map.get(package_name.lower(), "Debian")  # Default to "Debian" if unknown
-
-# Process and print vulnerability details for a package.
-def process_vulnerabilities(vulns, package_name):
-    """
-    Process and print vulnerability details for a package.
-    """
-    if not vulns or "vulns" not in vulns:
-        print(f"No vulnerabilities found for {package_name}.")
-        return
-
-    for vuln in vulns["vulns"]:
-        print(f"CVE ID: {vuln.get('id', 'N/A')}")
-        print(f"Summary: {vuln.get('summary', 'N/A')}")
-        print(f"Severity: {vuln.get('severity', 'N/A')}")
-
-        # Affected ranges or versions
-        affects = vuln.get("affects", {}).get("ranges", [])
-        for affect in affects:
-            print(f"  - Affected OS/Repo: {affect.get('repo', 'N/A')}")
-            print(f"    Introduced: {affect.get('introduced', 'N/A')}")
-            print(f"    Fixed: {affect.get('fixed', 'N/A')}")
-
-        # References
-        references = vuln.get("references", [])
-        for ref in references:
-            print(f"  - Mitigation/Reference: {ref.get('url', 'N/A')}")
-
-        print("-" * 40)
-
-def main():
-    print("\n\nBEGINNING OSV.DEV QUERY MODULE\n\n")
-
-    # Path to your JSON file
-    json_file = "system_info.json"
-
-    # Load system info from JSON
     try:
-        system_info = load_system_info(json_file)
+        with open(file_path, "r") as f:
+            return json.load(f)
     except Exception as e:
         print(f"Error loading JSON file: {e}")
+        return None
+
+def query_osv(package_name, ecosystem):
+    url = "https://api.osv.dev/v1/query"
+    headers = {"Content-Type": "application/json"}
+    payload = {"package": {"name": package_name, "ecosystem": ecosystem}}
+
+    try:
+        response = requests.post(url, headers=headers, json=payload)
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        print(f"Error querying OSV for {ecosystem}: {e}")
+        return None
+
+def process_vulnerability_data(vulnerability_data):
+    if not vulnerability_data or "vulns" not in vulnerability_data:
+        return []
+
+    vulnerabilities = vulnerability_data["vulns"]
+    results = []
+    for vuln in vulnerabilities:
+        vuln_id = vuln.get("id", "N/A")
+        severity_score, severity_rating = get_severity_score(vuln)
+        description = vuln.get("summary", "No description available.")
+        results.append({
+            "id": vuln_id,
+            "severity": severity_rating,
+            "score": severity_score,
+            "description": description
+        })
+    return results
+
+def process_installed_software(installed_software):
+    ecosystems = ["PyPI", "Maven", "npm", "Go", "RubyGems", "NuGet", "Linux", "Debian", "Ubuntu"]
+
+    for software in installed_software:
+        software_name = software.get("name")
+        software_version = software.get("version")
+
+        if not software_name or not software_version:
+            print(f"Skipping invalid entry: {software}")
+            continue
+
+        print(f"\nChecking {CYAN}{software_name} {software_version}{RESET} against OSV")
+
+        all_vulnerabilities = []
+        for ecosystem in ecosystems:
+            print(f"Trying ecosystem: {ecosystem}...", end="\r")
+
+            vulnerability_data = query_osv(software_name, ecosystem)
+            vulnerabilities = process_vulnerability_data(vulnerability_data)
+            all_vulnerabilities.extend(vulnerabilities)
+
+            if vulnerabilities:
+                break
+
+        if all_vulnerabilities:
+            print(f"\nVulnerabilities Identified: {BRIGHT_RED}{len(all_vulnerabilities)}{RESET}\n")
+            for idx, vuln in enumerate(all_vulnerabilities, start=1):
+                severity_color = get_severity_color(vuln['severity'])
+                
+                print(f"{RED}{idx}. OSV Vulnerability ID: {vuln['id']}{RESET}")
+                print(f"Severity: {severity_color}{vuln['severity']}{RESET}")  
+                print(f"Score: {vuln['score']}")  
+                print(f"Description: {vuln['description']}")
+                print("-" * 50)
+        else:
+            print(f"\n\n{GREEN}No vulnerabilities found for {software_name} {software_version} across all ecosystems.{RESET}\n")
+
+def calculate_cvss_rating(cvss_vector):
+    """
+    Determine if the CVSS vector is CVSS3 or CVSS4 and calculate the score.
+    Returns (numerical_score, severity_rating).
+    """
+    try:
+        if cvss_vector.startswith("CVSS:3"):
+            cvss = CVSS3(cvss_vector)
+        elif cvss_vector.startswith("CVSS:4"):
+            cvss = CVSS4(cvss_vector)
+        else:
+            return "UNKNOWN", "UNKNOWN"
+
+        numerical_score = cvss.scores()[0]  # First score is Base Score
+
+        if numerical_score >= 9.0:
+            severity_rating = "CRITICAL"
+        elif numerical_score >= 7.0:
+            severity_rating = "HIGH"
+        elif numerical_score >= 4.0:
+            severity_rating = "MEDIUM"
+        else:
+            severity_rating = "LOW"
+
+        return numerical_score, severity_rating
+
+    except Exception as e:
+        print(f"Error calculating CVSS score: {e}")
+        return "UNKNOWN", "UNKNOWN"
+
+def get_severity_score(vuln):
+    """Extract and calculate the highest-priority CVSS score (CVSS4 > CVSS3 > CVSS2)."""
+    try:
+        severity_list = vuln.get("severity", [])
+        cvss_vector = None
+
+        # Prioritize CVSS4 over CVSS3, and CVSS3 over CVSS2
+        for severity in severity_list:
+            if severity.get("type") == "CVSS_V4":
+                cvss_vector = severity.get("score")
+                break  # Prioritize CVSS4, so stop searching
+            elif severity.get("type") == "CVSS_V3" and not cvss_vector:
+                cvss_vector = severity.get("score")
+            elif severity.get("type") == "CVSS_V2" and not cvss_vector:
+                cvss_vector = severity.get("score")
+
+        if cvss_vector:
+            return calculate_cvss_rating(cvss_vector)
+
+        return "UNKNOWN", "UNKNOWN"
+
+    except Exception as e:
+        print(f"Error extracting severity score: {e}")
+        return "UNKNOWN", "UNKNOWN"
+
+
+def get_severity_color(severity_rating):
+    severity_colors = {
+        "LOW": GREEN,
+        "MEDIUM": YELLOW,
+        "HIGH": BRIGHT_RED,
+        "CRITICAL": BRIGHT_MAGENTA,
+        "UNKNOWN": RESET  
+    }
+    return severity_colors.get(severity_rating, RESET)
+
+def main():
+    text = "BEGINNING OSV QUERY MODULE"
+    padding = 2 
+    width = len(text) + (padding * 2)
+
+    print(f"\n\n\t\t{BRIGHT_MAGENTA}╔" + "═" * width + "╗")
+    print("\t\t║" + " " * width + "║")
+    print(f"\t\t║{' ' * padding}{BRIGHT_CYAN}{text}{BRIGHT_MAGENTA}{' ' * padding}║")
+    print("\t\t║" + " " * width + "║")
+    print("\t\t╚" + "═" * width + "╝" + RESET + "\n\n")
+
+    json_file = "system_info.json"
+    system_info = load_system_info(json_file)
+    if not system_info:
         return
 
-    # Query OSV.dev
-    print("Retrieving installed software...")
     installed_software = system_info.get("installed_software", [])
-
     if not installed_software:
         print("No installed software found in the JSON file.")
         return
 
-    print(f"Found {len(installed_software)} installed packages. Querying OSV.dev...")
-    for software in installed_software:
-        package_name = software.get("name")
-        version = software.get("version")
+    print(f"Found {len(installed_software)} installed packages. Querying OSV...\n")
+    process_installed_software(installed_software)
 
-        if not package_name or not version:
-            print(f"Skipping invalid entry: {software}")
-            continue
+    text = "OSV QUERY MODULE CLEAN EXIT"
+    padding = 2 
+    width = len(text) + (padding * 2)
 
-        print(f"Checking {package_name} (version {version})...")
-        vulns = query_osv(package_name, version)
-        process_vulnerabilities(vulns, package_name)
+    print(f"\n\n\t\t{BRIGHT_MAGENTA}╔" + "═" * width + "╗")
+    print("\t\t║" + " " * width + "║")
+    print(f"\t\t║{' ' * padding}{BRIGHT_CYAN}{text}{BRIGHT_MAGENTA}{' ' * padding}║")
+    print("\t\t║" + " " * width + "║")
+    print("\t\t╚" + "═" * width + "╝" + RESET + "\n\n")
     
-    time.sleep(2)
-
-# Run the main function
 if __name__ == "__main__":
     main()
