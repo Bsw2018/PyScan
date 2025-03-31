@@ -22,7 +22,7 @@ from Executable import Executable
 
 class OsScanner:
 
-	def __init__(self, output_file="installed_software.json"):
+	def __init__(self, output_file="system_info.json"):
 
 		self.output_file = output_file
 
