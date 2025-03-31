@@ -1,0 +1,13 @@
+{
+  "installed_software": [
+    {"name": "ubuntu", "version": "16.04", "cpe": "cpe:2.3:o:canonical:ubuntu_linux:16.04"},
+    {"name": "nginx", "version": "1.22", "cpe": "cpe:2.3:a:nginx:nginx:1.22"},
+    {"name": "openssl", "version": "3.0", "cpe": "cpe:2.3:a:openssl:openssl:3.0"},
+    {"name": "openssl", "version": "1.0.1", "cpe": "cpe:2.3:a:openssl:openssl:1.0.1"},
+    {"name": "struts", "version": "2.5.20", "cpe": "cpe:2.3:a:apache:struts:2.5.20"},
+    {"name": "log4j", "version": "2.14.0", "cpe": "cpe:2.3:a:apache:log4j:2.14.0"},
+    {"name": "log4j", "version": "2.14.1", "cpe": "cpe:2.3:a:apache:log4j:2.14.1"},
+    {"name": "jinja2", "version": "2.4.1", "cpe": "cpe:2.3:a:palletsprojects:jinja:2.4.1"},
+    {"name": "flask", "version": "0.12.2", "cpe": "cpe:2.3:a:palletsprojects:flask:0.12.2"}
+  ]
+}
