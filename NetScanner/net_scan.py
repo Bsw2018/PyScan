@@ -46,18 +46,17 @@ class NetScanner:
     def scan_routing_table(self):
         pass
 
-if __name__ == "__main__":
+#if __name__ == "__main__":
 
     #print("Net Scanner Class")
 
-    netscanner = NetScanner()
+    # netscanner = NetScanner()
 
 
-    # Tester for returning interface names
-    for key, values in netscanner.get_netInterfaceDict().items():
-        print(key)
-        #print("Interface Name:" + key)
-        #print("Interface Details:")
-        for value in values:
-            print(value[1])
-
+    # # Tester for returning interface names
+    # for key, values in netscanner.get_netInterfaceDict().items():
+    #     print(key)
+    #     #print("Interface Name:" + key)
+    #     #print("Interface Details:")
+    #     for value in values:
+    #         print(value[1])

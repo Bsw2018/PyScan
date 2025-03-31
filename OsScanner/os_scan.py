@@ -142,15 +142,15 @@ if __name__ == "__main__":
 
 
 	#Tester for the get_OsServices function
-	# for service in scanner.get_OsServices():
-	# 	#if service.serviceName is not None:
-	# 	print(service.serviceName + ":")
-	# 	print("\t\t\t" + service.serviceStatus)
-	# 	print("\t\t\t" + service.pid)
-	# 	print("\t\t\t" + service.serviceOwner)
-	# 	print("\t\t\t" + service.serviceGroup)
+	for service in scanner.get_OsServices():
+		#if service.serviceName is not None:
+		print(service.serviceName + ":")
+		print("\t\t\t" + service.serviceStatus)
+		print("\t\t\t" + service.pid)
+		print("\t\t\t" + service.serviceOwner)
+		print("\t\t\t" + service.serviceGroup)
 
-	# 	print("\n\n")
+		print("\n\n")
 
 	# Tester for get_OsCurrentUser functions
 	#name = scanner.get_OsCurrentUser()
