@@ -11,6 +11,9 @@ import re
 import subprocess
 import tkinter as tk
 from tkinter import ttk
+
+import json
+
 from Group import Group
 from User import User
 from Service import Service
@@ -19,7 +22,10 @@ from Executable import Executable
 
 class OsScanner:
 
-	def __init__(self):
+	def __init__(self, output_file="installed_software.json"):
+
+		self.output_file = output_file
+
 		self.OsType = os.name # Operating System Type 
 		self.OsUsers = [] # List of system users
 		self.OsGroups = [] # List of system groups
@@ -113,11 +119,45 @@ class OsScanner:
 
 		return sudoersPerms
 
+	# Method for gathering installed package information
+	def get_installed_packages(self):
+
+		installed_packages = []
+
+		try:
+			dpkg_output = subprocess.check_output(['dpkg-query', '-W', '-f=${Package} ${Version}\n'], encoding='utf-8')
+
+			for line in dpkg_output.strip().split("\n"):
+				package_name, package_version = line.split(' ', 1)
+
+				cpe = f"cpe:2.3:a:{package_name}:{package_version}"
+
+				installed_packages.append({
+					"name": package_name,
+					"version" : package_version,
+					"cpe": cpe
+					})
+
+		except subprocess.CalledProcessError as e:
+			print(f"Error gathering packages: {e}")
+
+
+		software_data = {"installed_packages": installed_packages}
+
+		with open(self.output_file, 'w') as f:
+			json.dump(software_data,f,indent=2)
+
+
+
 
 
 if __name__ == "__main__":
 	
 	scanner = OsScanner()
+
+	scanner.get_installed_packages()
+
+
 	
 	#Tester for check_Sudeors method
 
@@ -142,15 +182,15 @@ if __name__ == "__main__":
 
 
 	#Tester for the get_OsServices function
-	for service in scanner.get_OsServices():
-		#if service.serviceName is not None:
-		print(service.serviceName + ":")
-		print("\t\t\t" + service.serviceStatus)
-		print("\t\t\t" + service.pid)
-		print("\t\t\t" + service.serviceOwner)
-		print("\t\t\t" + service.serviceGroup)
+	# for service in scanner.get_OsServices():
+	# 	#if service.serviceName is not None:
+	# 	print(service.serviceName + ":")
+	# 	print("\t\t\t" + service.serviceStatus)
+	# 	print("\t\t\t" + service.pid)
+	# 	print("\t\t\t" + service.serviceOwner)
+	# 	print("\t\t\t" + service.serviceGroup)
 
-		print("\n\n")
+	# 	print("\n\n")
 
 	# Tester for get_OsCurrentUser functions
 	#name = scanner.get_OsCurrentUser()
