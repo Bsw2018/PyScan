@@ -2,7 +2,9 @@
 # The class name is NetScanner
 # The class should look for network interfaces, ip addresses, open ports, firewall rules, etc
 
-
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'lib')))
 import psutil
 import socket
 
