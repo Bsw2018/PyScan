@@ -2,9 +2,14 @@ import os
 import sys
 import json
 import requests
+import time
 sys.path.append(os.path.abspath("./lib"))
 from colors import *
 from cvss import CVSS2, CVSS3
+import urllib.parse
+
+
+
 
 #
 # Load installed software information from a JSON file.
@@ -21,6 +26,9 @@ def load_system_info(file_path):
 # Query the NVD API for vulnerabilities using a CPE identifier.
 #
 def query_nvd(cpe, api_key, cvss_v2_vector=None):
+
+    #encoded_cpe = urllib.parse.quote(cpe)
+
     url = f"https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName={cpe}"
     if cvss_v2_vector:
         url += f"&cvssV2Metrics={cvss_v2_vector}"
@@ -131,18 +139,30 @@ def process_cve_data(cve_data):
 #
 def process_installed_software(installed_software, api_key):
     
+    # Counter for sleeping the query for five seconds
+    counter = 0
+
     for software in installed_software:
         software_name = software.get("name")
         software_version = software.get("version")
-        cpe = software.get("cpe")
+        cpe = software.get("encoded_cpe")
 
         if not cpe:
             print(f"Skipping invalid entry: {software}")
             continue
 
         print(f"\nChecking {CYAN}{software_name} {software_version}{RESET} against NVD\n")
+        
+        # If the query number is divisible by 5
+        if counter % 5 == 0:
+            # Sleep the process for five seconds
+            time.sleep(5)
+
+
         cve_data = query_nvd(cpe, api_key)
         process_cve_data(cve_data)
+
+        counter += 1
 
 def calculate_cvss_score(version, vector_string):
     # Version handling for different CVSS scores

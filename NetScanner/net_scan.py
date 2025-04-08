@@ -46,11 +46,11 @@ class NetScanner:
     def scan_routing_table(self):
         pass
 
-#if __name__ == "__main__":
+if __name__ == "__main__":
 
-    #print("Net Scanner Class")
+    print("Net Scanner Class")
 
-    # netscanner = NetScanner()
+    netscanner = NetScanner()
 
 
     # # Tester for returning interface names

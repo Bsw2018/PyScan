@@ -76,11 +76,15 @@ class netScanView(tk.Tk):
 
 
 
-if __name__ == "__main__":
 
+def main():
 
     netscanner = NetScanner()
 
 
     netScanApp = netScanView(netscanner)
     netScanApp.mainloop()
+
+if __name__ == "__main__":
+
+    main()
