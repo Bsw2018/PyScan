@@ -6,10 +6,6 @@ import time
 sys.path.append(os.path.abspath("./lib"))
 from colors import *
 from cvss import CVSS2, CVSS3
-import urllib.parse
-
-
-
 
 #
 # Load installed software information from a JSON file.
@@ -26,8 +22,6 @@ def load_system_info(file_path):
 # Query the NVD API for vulnerabilities using a CPE identifier.
 #
 def query_nvd(cpe, api_key, cvss_v2_vector=None):
-
-    #encoded_cpe = urllib.parse.quote(cpe)
 
     url = f"https://services.nvd.nist.gov/rest/json/cves/2.0?cpeName={cpe}"
     if cvss_v2_vector:
@@ -48,11 +42,11 @@ def query_nvd(cpe, api_key, cvss_v2_vector=None):
 #
 def process_cve_data(cve_data):
     if not cve_data or "vulnerabilities" not in cve_data or not cve_data.get("vulnerabilities", []):
-        print(f"\n{GREEN}No Vulnerabilities Found!{RESET}\n")
+        print(f"{GREEN}No Vulnerabilities Found!{RESET}")
         return
 
     vulnerabilities_count = len(cve_data.get("vulnerabilities", []))
-    print(f"Vulnerabilities Identified: {CYAN}{vulnerabilities_count}{RESET}\n")
+    print(f"Vulnerabilities Identified: {RED}{vulnerabilities_count}{RESET}\n")
 
     for idx, item in enumerate(cve_data.get("vulnerabilities", []), start=1):
         cve_id = item.get("cve", {}).get("id", "N/A")
@@ -148,10 +142,10 @@ def process_installed_software(installed_software, api_key):
         cpe = software.get("encoded_cpe")
 
         if not cpe:
-            print(f"Skipping invalid entry: {software}")
+            print(f"\n\n{RED}SKIPPING INVALID ENTRY: {software}{RESET}")
             continue
 
-        print(f"\nChecking {CYAN}{software_name} {software_version}{RESET} against NVD\n")
+        print(f"\n\nChecking {BLUE}{software_name} {software_version}{RESET} against NVD\n")
         
         # If the query number is divisible by 5
         if counter % 5 == 0:
@@ -182,16 +176,6 @@ def calculate_cvss_score(version, vector_string):
 
 
 def main():
-    text = "BEGINNING NIST NVD QUERY MODULE"
-    padding = 2 
-    width = len(text) + (padding * 2)
-
-    print(f"\n\n\t\t{BRIGHT_MAGENTA}╔" + "═" * width + "╗")
-    print("\t\t║" + " " * width + "║")
-    print(f"\t\t║{' ' * padding}{BRIGHT_CYAN}{text}{BRIGHT_MAGENTA}{' ' * padding}║")
-    print("\t\t║" + " " * width + "║")
-    print("\t\t╚" + "═" * width + "╝" + RESET + "\n\n")
-
     api_key = "b52f218b-3379-4c3d-92f7-7d8b81ca0389"
 
     # Load system info from JSON
@@ -205,19 +189,8 @@ def main():
         print("No installed software found in the JSON file.")
         return
 
-    print(f"Found {len(installed_software)} installed packages. Querying NVD...\n")
+    print(f"Found {len(installed_software)} installed packages.\n")
     process_installed_software(installed_software, api_key)
 
-    text = "NVD QUERY MODULE CLEAN EXIT"
-    padding = 2 
-    width = len(text) + (padding * 2)
-
-    print(f"\n\n\t\t{BRIGHT_MAGENTA}╔" + "═" * width + "╗")
-    print("\t\t║" + " " * width + "║")
-    print(f"\t\t║{' ' * padding}{BRIGHT_CYAN}{text}{BRIGHT_MAGENTA}{' ' * padding}║")
-    print("\t\t║" + " " * width + "║")
-    print("\t\t╚" + "═" * width + "╝" + RESET + "\n\n")
-
-# Remove upon final integration
 if __name__ == "__main__":
     main()
