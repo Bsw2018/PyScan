@@ -12,5 +12,5 @@ Install using your operating system's package manager:<br>
       "Windows: Reinstall Python with tkinter\n"
       "macOS (Homebrew): brew install python-tk"<br><br> 
 
-***Querying the NIST NVD does not require an api token.***<br><br>
+<br>***Querying the NIST NVD does not require an api token.***<br><br>
 However, **query_nvd.py** utilizes an api token and therefore it is recommended to visit the NIST website and have one automatically generated for you. They are free, instant, and allow faster queries.
