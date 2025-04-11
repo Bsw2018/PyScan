@@ -53,14 +53,14 @@ def process_installed_software(installed_software):
         software_version = software.get("version")
 
         if not software_name or not software_version:
-            print(f"Skipping invalid entry: {software}")
+            print(f"\n\n{RED}SKIPPING INVALID ENTRY: {software}{RESET}")
             continue
 
-        print(f"\nChecking {CYAN}{software_name} {software_version}{RESET} against OSV")
+        print(f"\n\nChecking {BLUE}{software_name} {software_version}{RESET} against OSV")
 
         all_vulnerabilities = []
         for ecosystem in ecosystems:
-            print(f"Trying ecosystem: {ecosystem}...", end="\r")
+            #print(f"Trying ecosystem: {ecosystem}...", end="\r")
 
             vulnerability_data = query_osv(software_name, ecosystem)
             vulnerabilities = process_vulnerability_data(vulnerability_data)
@@ -70,7 +70,7 @@ def process_installed_software(installed_software):
                 break
 
         if all_vulnerabilities:
-            print(f"\nVulnerabilities Identified: {BRIGHT_RED}{len(all_vulnerabilities)}{RESET}\n")
+            print(f"\nVulnerabilities Identified: {RED}{len(all_vulnerabilities)}{RESET}\n")
             for idx, vuln in enumerate(all_vulnerabilities, start=1):
                 severity_color = get_severity_color(vuln['severity'])
                 
@@ -80,7 +80,7 @@ def process_installed_software(installed_software):
                 print(f"Description: {vuln['description']}")
                 print("-" * 50)
         else:
-            print(f"\n\n{GREEN}No vulnerabilities found for {software_name} {software_version} across all ecosystems.{RESET}\n")
+            print(f"\n{GREEN}No vulnerabilities found for {software_name} {software_version} across all ecosystems.{RESET}")
 
 def calculate_cvss_rating(cvss_vector):
     """
@@ -143,22 +143,12 @@ def get_severity_color(severity_rating):
         "LOW": GREEN,
         "MEDIUM": YELLOW,
         "HIGH": BRIGHT_RED,
-        "CRITICAL": BRIGHT_MAGENTA,
+        "CRITICAL": MAGENTA,
         "UNKNOWN": RESET  
     }
     return severity_colors.get(severity_rating, RESET)
 
 def main():
-    text = "BEGINNING OSV QUERY MODULE"
-    padding = 2 
-    width = len(text) + (padding * 2)
-
-    print(f"\n\n\t\t{BRIGHT_MAGENTA}╔" + "═" * width + "╗")
-    print("\t\t║" + " " * width + "║")
-    print(f"\t\t║{' ' * padding}{BRIGHT_CYAN}{text}{BRIGHT_MAGENTA}{' ' * padding}║")
-    print("\t\t║" + " " * width + "║")
-    print("\t\t╚" + "═" * width + "╝" + RESET + "\n\n")
-
     json_file = "system_info.json"
     system_info = load_system_info(json_file)
     if not system_info:
@@ -169,18 +159,8 @@ def main():
         print("No installed software found in the JSON file.")
         return
 
-    print(f"Found {len(installed_software)} installed packages. Querying OSV...\n")
+    print(f"Found {len(installed_software)} installed packages.\n")
     process_installed_software(installed_software)
-
-    text = "OSV QUERY MODULE CLEAN EXIT"
-    padding = 2 
-    width = len(text) + (padding * 2)
-
-    print(f"\n\n\t\t{BRIGHT_MAGENTA}╔" + "═" * width + "╗")
-    print("\t\t║" + " " * width + "║")
-    print(f"\t\t║{' ' * padding}{BRIGHT_CYAN}{text}{BRIGHT_MAGENTA}{' ' * padding}║")
-    print("\t\t║" + " " * width + "║")
-    print("\t\t╚" + "═" * width + "╝" + RESET + "\n\n")
     
 if __name__ == "__main__":
     main()
