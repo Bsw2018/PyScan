@@ -73,7 +73,6 @@ def create_html_report(output_files):
         "</head>",
         "<body>"
     ]
-    
     for module, file_path in output_files.items():
         html_content.append(f"<h2>{module} Output:</h2>")
         html_content.append("<pre>")
@@ -90,6 +89,6 @@ def create_html_report(output_files):
     with open("report.html", "w", encoding="utf-8") as f:
         f.write("\n".join(html_content))
     
-    print("\nSuccessfully generated 'report.html'\n")
+    print("\n\nSuccessfully generated 'report.html'\n")
     
    
