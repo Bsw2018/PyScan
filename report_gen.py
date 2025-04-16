@@ -102,6 +102,13 @@ def create_html_report(output_files):
                     html_content.append("<br>")
             except Exception as e:
                 html_content.append(f"<pre><span style='color:red'>Error parsing JSON: {e}</span></pre>")
+        elif "os_meta_output.json" in file_path:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+
+            for key, value in data.items():
+                val = ', '.join(value) if isinstance(value, list) else value
+                html_content.append(f"<strong>{key}:</strong> {val}<br>")
         else:
             # Default behavior for .txt or non-special .json
             html_content.append("<pre>")

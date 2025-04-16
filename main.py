@@ -95,6 +95,8 @@ def cleanup(report_files):
 def main():
     scanner = OsScanner(output_file="system_info.json")
     scanner.get_installed_packages()
+    scanner.output_system_metadata("os_meta_output.json")
+
 
     netscanner = NetScanner()
     netscanner.output_to_file("net_scan_output.json")
@@ -111,7 +113,7 @@ def main():
     
     
     report_files = OrderedDict()
-
+    report_files["os_scan"] = "os_meta_output.json"
     report_files["net_scan"] = "net_scan_output.json"
     report_files.update(report_files_temp)
 

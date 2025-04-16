@@ -13,6 +13,9 @@ import tkinter as tk
 from tkinter import ttk
 import urllib.parse
 import json
+import platform
+import getpass
+
 
 from .Group import Group
 from .User import User
@@ -168,6 +171,32 @@ class OsScanner:
 
 
 
+
+
+
+    def output_system_metadata(self,filename="os_meta_output.json"):
+
+        try:
+            current_user = getpass.getuser()
+            user_groups = [g.gr_name for g in grp.getgrall() if current_user in g.gr_mem or g.gr_gid == os.getgid()]
+            metadata = {
+            "os_type": platform.system(),
+            "os_release": platform.release(),
+            "os_versioin": platform.version(),
+            "kernel": platform.uname().release,
+            "current_user": current_user,
+            "user_groups": user_groups
+            }
+
+            with open(filename, "w") as f:
+                json.dump(metadata, f, indent=2)
+
+        except Exception as e:
+            print(f"Error collecting OS metadata: {e}")
+        
+
+
+
 def normalize_version(version):
     # Remove Debian/Ubuntu revision (e.g., "1.0.2ubuntu3" → "1.0.2")
     match = re.match(r"([\d\.]+)", version)
@@ -177,7 +206,9 @@ if __name__ == "__main__":
     
     scanner = OsScanner()
 
-    scanner.get_installed_packages()
+    scanner.output_system_metadata("os_meta_output.json")
+
+    #scanner.get_installed_packages()
 
 
     

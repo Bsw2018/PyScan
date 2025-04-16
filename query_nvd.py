@@ -176,7 +176,7 @@ def calculate_cvss_score(version, vector_string):
 
 
 def main():
-    api_key = "b52f218b-3379-4c3d-92f7-7d8b81ca0389"
+    api_key = "62cc6af0-d37f-44ec-bdfa-469b6fcaad13"
 
     # Load system info from JSON
     json_file = "system_info.json"
