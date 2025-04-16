@@ -1,0 +1,44 @@
+{
+  "lo": [
+    {
+      "family": "AddressFamily.AF_INET",
+      "address": "127.0.0.1",
+      "netmask": "255.0.0.0",
+      "broadcast": null,
+      "open_ports": []
+    },
+    {
+      "family": "AddressFamily.AF_INET6",
+      "address": "::1",
+      "netmask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
+      "broadcast": null
+    },
+    {
+      "family": "AddressFamily.AF_PACKET",
+      "address": "00:00:00:00:00:00",
+      "netmask": null,
+      "broadcast": null
+    }
+  ],
+  "enp0s3": [
+    {
+      "family": "AddressFamily.AF_INET",
+      "address": "10.0.2.15",
+      "netmask": "255.255.255.0",
+      "broadcast": "10.0.2.255",
+      "open_ports": []
+    },
+    {
+      "family": "AddressFamily.AF_INET6",
+      "address": "fe80::4abe:6571:4229:d8d6%enp0s3",
+      "netmask": "ffff:ffff:ffff:ffff::",
+      "broadcast": null
+    },
+    {
+      "family": "AddressFamily.AF_PACKET",
+      "address": "08:00:27:1c:5a:99",
+      "netmask": null,
+      "broadcast": "ff:ff:ff:ff:ff:ff"
+    }
+  ]
+}

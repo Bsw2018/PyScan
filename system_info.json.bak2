@@ -303,21 +303,21 @@
     },
     {
       "name": "binutils",
-      "version": "2.34-6ubuntu1.11",
+      "version": "2.34-6ubuntu1.10",
       "normalized_version": "2.34",
       "cpe": "cpe:2.3:a:debian:binutils:2.34:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Abinutils%3A2.34%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "binutils-common",
-      "version": "2.34-6ubuntu1.11",
+      "version": "2.34-6ubuntu1.10",
       "normalized_version": "2.34",
       "cpe": "cpe:2.3:a:debian:binutils-common:2.34:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Abinutils-common%3A2.34%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "binutils-x86-64-linux-gnu",
-      "version": "2.34-6ubuntu1.11",
+      "version": "2.34-6ubuntu1.10",
       "normalized_version": "2.34",
       "cpe": "cpe:2.3:a:debian:binutils-x86-64-linux-gnu:2.34:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Abinutils-x86-64-linux-gnu%3A2.34%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -730,7 +730,7 @@
     },
     {
       "name": "dirmngr",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:dirmngr:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Adirmngr%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -2571,70 +2571,70 @@
     },
     {
       "name": "gnupg",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gnupg:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agnupg%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gnupg-l10n",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gnupg-l10n:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agnupg-l10n%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gnupg-utils",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gnupg-utils:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agnupg-utils%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gpg",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gpg:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agpg%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gpg-agent",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gpg-agent:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agpg-agent%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gpg-wks-client",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gpg-wks-client:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agpg-wks-client%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gpg-wks-server",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gpg-wks-server:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agpg-wks-server%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gpgconf",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gpgconf:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agpgconf%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gpgsm",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gpgsm:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agpgsm%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "gpgv",
-      "version": "2.2.19-3ubuntu2.4",
+      "version": "2.2.19-3ubuntu2.2",
       "normalized_version": "2.2.19",
       "cpe": "cpe:2.3:a:debian:gpgv:2.2.19:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Agpgv%3A2.2.19%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -3551,7 +3551,7 @@
     },
     {
       "name": "libbinutils",
-      "version": "2.34-6ubuntu1.11",
+      "version": "2.34-6ubuntu1.10",
       "normalized_version": "2.34",
       "cpe": "cpe:2.3:a:debian:libbinutils:2.34:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alibbinutils%3A2.34%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -4048,14 +4048,14 @@
     },
     {
       "name": "libctf-nobfd0",
-      "version": "2.34-6ubuntu1.11",
+      "version": "2.34-6ubuntu1.10",
       "normalized_version": "2.34",
       "cpe": "cpe:2.3:a:debian:libctf-nobfd0:2.34:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alibctf-nobfd0%3A2.34%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "libctf0",
-      "version": "2.34-6ubuntu1.11",
+      "version": "2.34-6ubuntu1.10",
       "normalized_version": "2.34",
       "cpe": "cpe:2.3:a:debian:libctf0:2.34:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alibctf0%3A2.34%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -9235,10 +9235,10 @@
     },
     {
       "name": "linux-generic-hwe-20.04",
-      "version": "5.15.0.136.147~20.04.1",
-      "normalized_version": "5.15.0.136.147",
-      "cpe": "cpe:2.3:a:debian:linux-generic-hwe-20.04:5.15.0.136.147:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-generic-hwe-20.04%3A5.15.0.136.147%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
+      "version": "5.15.0.134.145~20.04.1",
+      "normalized_version": "5.15.0.134.145",
+      "cpe": "cpe:2.3:a:debian:linux-generic-hwe-20.04:5.15.0.134.145:*:*:*:*:*:*:*",
+      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-generic-hwe-20.04%3A5.15.0.134.145%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "linux-headers-5.15.0-134-generic",
@@ -9246,13 +9246,6 @@
       "normalized_version": "5.15.0",
       "cpe": "cpe:2.3:a:debian:linux-headers-5.15.0-134-generic:5.15.0:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-headers-5.15.0-134-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
-    },
-    {
-      "name": "linux-headers-5.15.0-136-generic",
-      "version": "5.15.0-136.147~20.04.1",
-      "normalized_version": "5.15.0",
-      "cpe": "cpe:2.3:a:debian:linux-headers-5.15.0-136-generic:5.15.0:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-headers-5.15.0-136-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "linux-headers-5.15.0-67-generic",
@@ -9263,10 +9256,10 @@
     },
     {
       "name": "linux-headers-generic-hwe-20.04",
-      "version": "5.15.0.136.147~20.04.1",
-      "normalized_version": "5.15.0.136.147",
-      "cpe": "cpe:2.3:a:debian:linux-headers-generic-hwe-20.04:5.15.0.136.147:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-headers-generic-hwe-20.04%3A5.15.0.136.147%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
+      "version": "5.15.0.134.145~20.04.1",
+      "normalized_version": "5.15.0.134.145",
+      "cpe": "cpe:2.3:a:debian:linux-headers-generic-hwe-20.04:5.15.0.134.145:*:*:*:*:*:*:*",
+      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-headers-generic-hwe-20.04%3A5.15.0.134.145%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "linux-hwe-5.15-headers-5.15.0-134",
@@ -9274,13 +9267,6 @@
       "normalized_version": "5.15.0",
       "cpe": "cpe:2.3:a:debian:linux-hwe-5.15-headers-5.15.0-134:5.15.0:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-hwe-5.15-headers-5.15.0-134%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
-    },
-    {
-      "name": "linux-hwe-5.15-headers-5.15.0-136",
-      "version": "5.15.0-136.147~20.04.1",
-      "normalized_version": "5.15.0",
-      "cpe": "cpe:2.3:a:debian:linux-hwe-5.15-headers-5.15.0-136:5.15.0:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-hwe-5.15-headers-5.15.0-136%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "linux-hwe-5.15-headers-5.15.0-67",
@@ -9297,13 +9283,6 @@
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-image-5.15.0-134-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
-      "name": "linux-image-5.15.0-136-generic",
-      "version": "5.15.0-136.147~20.04.1",
-      "normalized_version": "5.15.0",
-      "cpe": "cpe:2.3:a:debian:linux-image-5.15.0-136-generic:5.15.0:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-image-5.15.0-136-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
-    },
-    {
       "name": "linux-image-5.15.0-67-generic",
       "version": "5.15.0-67.74~20.04.1",
       "normalized_version": "5.15.0",
@@ -9312,14 +9291,14 @@
     },
     {
       "name": "linux-image-generic-hwe-20.04",
-      "version": "5.15.0.136.147~20.04.1",
-      "normalized_version": "5.15.0.136.147",
-      "cpe": "cpe:2.3:a:debian:linux-image-generic-hwe-20.04:5.15.0.136.147:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-image-generic-hwe-20.04%3A5.15.0.136.147%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
+      "version": "5.15.0.134.145~20.04.1",
+      "normalized_version": "5.15.0.134.145",
+      "cpe": "cpe:2.3:a:debian:linux-image-generic-hwe-20.04:5.15.0.134.145:*:*:*:*:*:*:*",
+      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-image-generic-hwe-20.04%3A5.15.0.134.145%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "linux-libc-dev",
-      "version": "5.4.0-212.232",
+      "version": "5.4.0-211.231",
       "normalized_version": "5.4.0",
       "cpe": "cpe:2.3:a:debian:linux-libc-dev:5.4.0:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-libc-dev%3A5.4.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -9330,13 +9309,6 @@
       "normalized_version": "5.15.0",
       "cpe": "cpe:2.3:a:debian:linux-modules-5.15.0-134-generic:5.15.0:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-modules-5.15.0-134-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
-    },
-    {
-      "name": "linux-modules-5.15.0-136-generic",
-      "version": "5.15.0-136.147~20.04.1",
-      "normalized_version": "5.15.0",
-      "cpe": "cpe:2.3:a:debian:linux-modules-5.15.0-136-generic:5.15.0:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-modules-5.15.0-136-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "linux-modules-5.15.0-67-generic",
@@ -9351,13 +9323,6 @@
       "normalized_version": "5.15.0",
       "cpe": "cpe:2.3:a:debian:linux-modules-extra-5.15.0-134-generic:5.15.0:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-modules-extra-5.15.0-134-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
-    },
-    {
-      "name": "linux-modules-extra-5.15.0-136-generic",
-      "version": "5.15.0-136.147~20.04.1",
-      "normalized_version": "5.15.0",
-      "cpe": "cpe:2.3:a:debian:linux-modules-extra-5.15.0-136-generic:5.15.0:*:*:*:*:*:*:*",
-      "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Alinux-modules-extra-5.15.0-136-generic%3A5.15.0%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "linux-modules-extra-5.15.0-67-generic",
@@ -11391,7 +11356,7 @@
     },
     {
       "name": "tzdata",
-      "version": "2025b-0ubuntu0.20.04",
+      "version": "2025a-0ubuntu0.20.04",
       "normalized_version": "2025",
       "cpe": "cpe:2.3:a:debian:tzdata:2025:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Atzdata%3A2025%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -11685,28 +11650,28 @@
     },
     {
       "name": "vim",
-      "version": "2:8.1.2269-1ubuntu5.32",
+      "version": "2:8.1.2269-1ubuntu5.31",
       "normalized_version": "2",
       "cpe": "cpe:2.3:a:debian:vim:2:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Avim%3A2%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "vim-common",
-      "version": "2:8.1.2269-1ubuntu5.32",
+      "version": "2:8.1.2269-1ubuntu5.31",
       "normalized_version": "2",
       "cpe": "cpe:2.3:a:debian:vim-common:2:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Avim-common%3A2%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "vim-runtime",
-      "version": "2:8.1.2269-1ubuntu5.32",
+      "version": "2:8.1.2269-1ubuntu5.31",
       "normalized_version": "2",
       "cpe": "cpe:2.3:a:debian:vim-runtime:2:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Avim-runtime%3A2%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
     },
     {
       "name": "vim-tiny",
-      "version": "2:8.1.2269-1ubuntu5.32",
+      "version": "2:8.1.2269-1ubuntu5.31",
       "normalized_version": "2",
       "cpe": "cpe:2.3:a:debian:vim-tiny:2:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Avim-tiny%3A2%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"
@@ -12112,7 +12077,7 @@
     },
     {
       "name": "xxd",
-      "version": "2:8.1.2269-1ubuntu5.32",
+      "version": "2:8.1.2269-1ubuntu5.31",
       "normalized_version": "2",
       "cpe": "cpe:2.3:a:debian:xxd:2:*:*:*:*:*:*:*",
       "encoded_cpe": "cpe%3A2.3%3Aa%3Adebian%3Axxd%3A2%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A%3A%2A"

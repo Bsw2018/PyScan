@@ -14,10 +14,10 @@ from tkinter import ttk
 import urllib.parse
 import json
 
-from Group import Group
-from User import User
-from Service import Service
-from Executable import Executable
+from .Group import Group
+from .User import User
+from .Service import Service
+from .Executable import Executable
 
 
 class OsScanner:

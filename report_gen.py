@@ -1,5 +1,5 @@
 import re
-
+import json
 #
 # Replaces tabs and maintains newlines for proper formatting.
 #
@@ -69,26 +69,52 @@ def create_html_report(output_files):
         "<style>",
         "body { font-family: monospace; background-color: #E2EAF4; margin: 0.5in; font-size: 18px; }",
         "pre { font-size: 16px; }",
+        "ul { margin-top: 0; margin-bottom: 1em; }",
         "</style>",
         "</head>",
         "<body>"
     ]
+
     for module, file_path in output_files.items():
         html_content.append(f"<h2>{module} Output:</h2>")
-        html_content.append("<pre>")
         
-        with open(file_path, 'r', encoding='utf-8') as f:
-            raw_text = f.read()
-            formatted_output = convert_tabs_and_newlines(raw_text)
-            styled_output = ansi_to_html(formatted_output)
-        html_content.append(styled_output)
-        html_content.append("</pre><br>")
-    
+        if file_path.endswith(".json") and "net_scan_output" in file_path:
+            # Custom handling for net_scan_output.json
+            try:
+                with open(file_path, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+
+                for iface, entries in data.items():
+                    html_content.append(f"<h3>Interface: {iface}</h3>")
+                    for entry in entries:
+                        html_content.append("<ul>")
+                        html_content.append(f"<li><strong>Family:</strong> {entry.get('family')}</li>")
+                        html_content.append(f"<li><strong>Address:</strong> {entry.get('address')}</li>")
+                        html_content.append(f"<li><strong>Netmask:</strong> {entry.get('netmask')}</li>")
+                        html_content.append(f"<li><strong>Broadcast:</strong> {entry.get('broadcast')}</li>")
+
+                        if "open_ports" in entry:
+                            ports = entry["open_ports"]
+                            port_str = ', '.join(str(p) for p in ports) if ports else "None"
+                            html_content.append(f"<li><strong>Open Ports:</strong> {port_str}</li>")
+
+                        html_content.append("</ul>")
+                    html_content.append("<br>")
+            except Exception as e:
+                html_content.append(f"<pre><span style='color:red'>Error parsing JSON: {e}</span></pre>")
+        else:
+            # Default behavior for .txt or non-special .json
+            html_content.append("<pre>")
+            with open(file_path, 'r', encoding='utf-8') as f:
+                raw_text = f.read()
+                formatted_output = convert_tabs_and_newlines(raw_text)
+                styled_output = ansi_to_html(formatted_output)
+            html_content.append(styled_output)
+            html_content.append("</pre><br>")
+
     html_content.append("</body></html>")
-    
+
     with open("report.html", "w", encoding="utf-8") as f:
         f.write("\n".join(html_content))
-    
+
     print("\n\nSuccessfully generated 'report.html'\n")
-    
-   

@@ -5,8 +5,15 @@ import threading
 import subprocess
 import report_gen
 
+
+
+
 sys.path.append(os.path.abspath("./lib"))
 from colors import *
+from OsScanner.os_scan import OsScanner
+from NetScanner.net_scan import NetScanner
+from collections import OrderedDict
+
 
 # A global timer that prints an updated elapsed time until told to stop.
 def global_timer(stop_event, start_time, print_lock):
@@ -86,14 +93,31 @@ def cleanup(report_files):
             print(f"Error removing file {filename}: {e}")
 
 def main():
+    scanner = OsScanner(output_file="system_info.json")
+    scanner.get_installed_packages()
+
+    netscanner = NetScanner()
+    netscanner.output_to_file("net_scan_output.json")
+
+
+
     modules = [
         {"script": "query_osv.py", "output": "osv_query_output.txt"},
         {"script": "query_nvd.py", "output": "nvd_query_output.txt"},
     ]
     
     # Run the modules concurrently.
-    report_files = run_modules(modules)
+    report_files_temp = run_modules(modules)
+    
+    
+    report_files = OrderedDict()
+
+    report_files["net_scan"] = "net_scan_output.json"
+    report_files.update(report_files_temp)
+
+
     report_gen.create_html_report(report_files)
+
     cleanup(report_files)
 
 if __name__ == "__main__":
